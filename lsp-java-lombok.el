@@ -26,8 +26,9 @@
 (require 'lsp-mode)
 
 (defvar lsp-java-lombok--jar-path
-  (concat user-emacs-directory
-          ".local/cache/lombok/lombok.jar"))
+  (if (boundp 'doom-cache-dir)
+      (f-join doom-cache-dir "lombok/lombok.jar")
+    (f-join user-emacs-directory ".local/cache/lombok/lombok.jar")))
 
 (defun lsp-java-lombok-download ()
   "Download the latest lombok jar."
